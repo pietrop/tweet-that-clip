@@ -9,6 +9,12 @@ _stack - optional_
 _How to build and run the code/app_
 
  
+- Get twitter credentials
+- Create a `.env` file and add that to the root of the app.
+
+```
+
+```
 
 ## Usage
 
