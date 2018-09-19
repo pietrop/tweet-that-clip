@@ -1,22 +1,13 @@
-const trim = require('./lib/trim');
-const upload = require('./lib/upload');
+const tweetThatClip = require('./lib/tweetThatClip');
 
-function tweetThatClip() {
-  const inputFile = './assets/test.mp4';
-  const outputFile = './assets/test_clipped.mp4';
-  const inputSeconds = 300;
-  const durationSeconds = 5;
-  const tweetText = 'This is the accompanying text with the video';
+// const opts = {
+//   inputFile: './assets/test.mp4'
+//   outputFile: './assets/test_clipped.mp4'
+//   inputSeconds: 300,
+//   durationSeconds: 5,
+//   tweetText: 'This is the accompanying text with the video'
+// };
 
-  trim(inputFile, inputSeconds, durationSeconds, outputFile, (err, res) => {
-    if (err) console.log(err);
-    console.log('Transcoding finished.');
+// tweetThatClip(opts);
 
-    upload(tweetText, outputFile, (err, res) => {
-      if (err) console.log(err);
-      console.log('Upload finished.');
-    });
-  });
-};
-
-tweetThatClip();
+module.exports = tweetThatClip;
