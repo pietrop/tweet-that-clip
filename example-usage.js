@@ -5,7 +5,9 @@ const opts = {
   outputFile: './assets/test_clipped.mp4',
   inputSeconds: 300,
   durationSeconds: 5,
-  tweetText: 'This is the accompanying text with the video'
+  tweetText: 'This is the accompanying text with the video',
+  // optional 
+  ffmpegPath: "/usr/local/bin/ffmpeg",
 };
 
 tweetThatClip(opts);
