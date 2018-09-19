@@ -1,0 +1,27 @@
+{
+  "name": "tweet-that-clip",
+  "version": "1.0.0",
+  "description": "Tweet a video clip from a video, with optional text status",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pietrop/tweet-that-clip.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pietrop/tweet-that-clip/issues"
+  },
+  "homepage": "https://github.com/pietrop/tweet-that-clip#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "ffmpeg-static": "^2.3.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "twit": "^2.2.11",
+    "twitter-media": "^0.2.0"
+  }
+}
