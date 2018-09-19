@@ -22,6 +22,6 @@
     "ffmpeg-static": "^2.3.0",
     "fluent-ffmpeg": "^2.1.2",
     "twit": "^2.2.11",
-    "twitter-media": "^0.2.0"
+    "twitter-media": "0.1.0"
   }
 }
