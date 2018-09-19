@@ -12,8 +12,18 @@ _How to build and run the code/app_
 - Get twitter credentials
 - Create a `.env` file and add that to the root of the app.
 
+- See ["Authentication - Access Tokens"](https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html) in twitter docs to get credentials. 
+
+```
+TWITTER_CONSUMER_KEY="",
+TWITTER_CONSUMER_SECRET=""
+TWITTER_CALLBACK=""
 ```
 
+and user credentials, to post on user timelines
+```
+TWITTER_ACCESS_TOKEN=""
+TWITTER_ACCESS_TOKEN_SECRET=""
 ```
 
 ## Usage
