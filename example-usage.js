@@ -5,9 +5,8 @@ const opts = {
   outputFile: './assets/test_clipped.mp4',
   inputSeconds: 300, // 
   durationSeconds: 139, // up to 140 seconds duration 
-  tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/'//,
-  // optional
-  // ffmpegPath: "/usr/local/bin/ffmpeg",
+  tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/',
+  ffmpegPath: '/Users/pietropassarelli/Dropbox/CODE/Vox/TBVE/bk/autoEdit_v2/interactive_transcription_generator/bin/ffmpeg'//"/usr/local/bin/ffmpeg" // optional
 };
 
 tweetThatClip(opts, (err, res) => {
