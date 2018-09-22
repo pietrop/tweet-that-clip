@@ -15,7 +15,7 @@ _How to build and run the code/app_
 - See ["Authentication - Access Tokens"](https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html) in twitter docs to get credentials. 
 
 ```
-TWITTER_CONSUMER_KEY="",
+TWITTER_CONSUMER_KEY=""
 TWITTER_CONSUMER_SECRET=""
 TWITTER_CALLBACK=""
 ```
@@ -33,6 +33,18 @@ TWITTER_ACCESS_TOKEN_SECRET=""
 ## System Architecture
 
 _High level overview of system architecture_
+
+
+<!-- Twitter video upload constraints
+https://developer.twitter.com/en/docs/media/upload-media/uploading-media/media-best-practices
+
+
+Issue around file size
+https://github.com/ttezel/twit/issues/461
+
+
+Current restriction by Twit library is 15 sec 
+ -->
 
  
 
