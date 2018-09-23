@@ -1,5 +1,7 @@
 # `tweet-that-clip`
 Tweet a video clip from a video, with optional text status.
+
+Originally developed as part of [textAV 2018, for "Full Fact - tweet that clip"](https://textav.gitbook.io/textav-event-2018/unconference-projects/full-fact-tweet-that-clip) by [Pietro](https://github.com/pietrop) & [James](https://github.com/jamesdools).
  
 
 ## Setup
