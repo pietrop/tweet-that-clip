@@ -1,4 +1,4 @@
-# tweet-that-clip
+# `tweet-that-clip`
 Tweet a video clip from a video, with optional text status.
  
 
@@ -73,6 +73,21 @@ const opts = {
 
 If `ffmpegPath` not provided uses default one on the system, if present.
 
+### Optional credentials object
+For some use cases such as electron, you might want to pass in an optional `credentials` object attribute, see example blow
+
+```js
+const opts = {
+  ...
+  // optional credentials 
+  credentials: {
+    consumerKey: "",
+    consumerSecret: "",
+    accessToken: "",
+    accessTokenSecret: ""
+  }
+};
+```
  
 
 ## System Architecture

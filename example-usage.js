@@ -1,12 +1,21 @@
 const tweetThatClip = require('./index.js');
+const path = require('path');
 
 const opts = {
-  inputFile: './assets/test.mp4',
-  outputFile: './assets/test_clipped.mp4',
-  inputSeconds: 300, // 
+  inputFile: path.join(__dirname,'./assets/test.mp4'),
+  outputFile: path.join(__dirname,'./assets/test_clipped.mp4'),
+  inputSeconds: 30, // 
   durationSeconds: 139, // up to 140 seconds duration 
-  tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/',
-  ffmpegPath: '/Users/pietropassarelli/Dropbox/CODE/Vox/TBVE/bk/autoEdit_v2/interactive_transcription_generator/bin/ffmpeg'//"/usr/local/bin/ffmpeg" // optional
+  //tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/',
+  tweetText: '@autoEdit2 twitter test - Rob',
+  // optional ffmpeg path
+  // ffmpegPath: '/Users/pietropassarelli/Dropbox/CODE/Vox/TBVE/bk/autoEdit_v2/interactive_transcription_generator/bin/ffmpeg',//"/usr/local/bin/ffmpeg" // optional
+  // credentials: {
+  //   consumerKey: "",
+  //   consumerSecret: "",
+  //   accessToken: "",
+  //   accessTokenSecret: ""
+  // }
 };
 
 tweetThatClip(opts, (err, res) => {

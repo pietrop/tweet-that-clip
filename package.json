@@ -1,6 +1,6 @@
 {
   "name": "tweet-that-clip",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Tweet a video clip from a video, with optional text status",
   "main": "index.js",
   "scripts": {
