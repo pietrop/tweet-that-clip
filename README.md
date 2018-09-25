@@ -3,6 +3,9 @@ Tweet a video clip from a video, with optional text status.
 
 Originally developed as part of [textAV 2018, for "Full Fact - tweet that clip"](https://textav.gitbook.io/textav-event-2018/unconference-projects/full-fact-tweet-that-clip) by [Pietro](https://github.com/pietrop) & [James](https://github.com/jamesdools).
  
+Note for now there's a limit on 30 seconds and 15 MB file size.
+It be good to look into making it `async` and being able to do 2 minutes, and 512 MB max.
+
 
 ## Setup
 
@@ -96,6 +99,10 @@ const opts = {
 
 _High level overview of system architecture_
 
+### Twitter API 
+[Video specs](https://developer.twitter.com/en/docs/media/upload-media/uploading-media/media-best-practices): ` 0.5 seconds and 30 seconds (sync) / 140 seconds (async)` and `not exceed 15 mb (sync) / 512 mb (async)`
+
+
 
 <!-- Twitter video upload constraints
 https://developer.twitter.com/en/docs/media/upload-media/uploading-media/media-best-practices
@@ -140,3 +147,6 @@ No tests for now
 _How to deploy the code/app into test/staging/production_
 
 No deployment for now
+
+
+
