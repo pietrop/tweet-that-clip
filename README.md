@@ -3,7 +3,7 @@ Tweet a video clip from a video, with optional text status.
 
 Originally developed as part of [textAV 2018, for "Full Fact - tweet that clip"](https://textav.gitbook.io/textav-event-2018/unconference-projects/full-fact-tweet-that-clip) by [Pietro](https://github.com/pietrop) & [James](https://github.com/jamesdools).
  
-
+Part of [textAV reusable components Trello board](https://trello.com/c/HBOdqlCz)
 
 ## Setup
 
@@ -139,3 +139,9 @@ No deployment, as node module, but available on npm as [`tweet-that-clip`](https
 
 
 
+<!-- 
+TODO:
+
+- [ ] could use some kind of tmp library to decide where to store tmp trimmed clip to then delete it when done? - not sure about pros and cons
+
+ -->

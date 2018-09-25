@@ -21,6 +21,7 @@ function tweetThatClip(opts, callback) {
       tweet_text: opts.tweetText
     }, (error, response)=>{
       // Deleting the trimmed clip 
+      console.log(opts.outputFile);
       fs.unlinkSync(opts.outputFile);
       console.info('Twitter upload finished.');
       if (error) {

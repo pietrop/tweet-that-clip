@@ -1,6 +1,6 @@
 {
   "name": "tweet-that-clip",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Tweet a video clip from a video, with optional text status",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,17 @@
     "type": "git",
     "url": "git+https://github.com/pietrop/tweet-that-clip.git"
   },
-  "author": "",
-  "license": "ISC",
+  "contributors": [
+    {
+      "name": "Pietro Passarelli",
+      "url": "https://github.com/pietrop"
+    },
+    {
+      "name": "James Dooley",
+      "url": "https://github.com/jamesdools"
+    }
+  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/pietrop/tweet-that-clip/issues"
   },
