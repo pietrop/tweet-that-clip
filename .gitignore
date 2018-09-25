@@ -79,3 +79,6 @@ typings/
 #ingore subtitles files
 *.srt
 *.sbv
+
+# mac file system file 
+.DS_Store

@@ -3,8 +3,6 @@ Tweet a video clip from a video, with optional text status.
 
 Originally developed as part of [textAV 2018, for "Full Fact - tweet that clip"](https://textav.gitbook.io/textav-event-2018/unconference-projects/full-fact-tweet-that-clip) by [Pietro](https://github.com/pietrop) & [James](https://github.com/jamesdools).
  
-Note for now there's a limit on 30 seconds and 15 MB file size.
-It be good to look into making it `async` and being able to do 2 minutes, and 512 MB max.
 
 
 ## Setup
@@ -44,13 +42,17 @@ npm install tweet-that-clip
 
 requrie and use in your code 
 ```js
+const path = require('path');
 const tweetThatClip = require('tweet-that-clip');
 
 const opts = {
-  inputFile: './assets/test.mp4',
-  outputFile: './assets/test_clipped.mp4',
-  inputSeconds: 300, // 
-  durationSeconds: 139, // up to 140 seconds duration 
+  // path to media file to trim and tweet
+  inputFile: path.join(__dirname,'./assets/test.mp4'),
+  // path for tmp file to trim
+  outputFile: path.join(__dirname,'./assets/test_clipped.mp4'),
+  inputSeconds: 300, // In seconds 
+  durationSeconds: 120, // Up to 2min duration - 120 Sec.
+    // Twitter text status  280 characters limit.
   tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/'
 };
 
@@ -96,26 +98,13 @@ const opts = {
  
 
 ## System Architecture
+_High level overview of "system architecture"_
 
-_High level overview of system architecture_
-
-### Twitter API 
-[Video specs](https://developer.twitter.com/en/docs/media/upload-media/uploading-media/media-best-practices): ` 0.5 seconds and 30 seconds (sync) / 140 seconds (async)` and `not exceed 15 mb (sync) / 512 mb (async)`
-
-
-
-<!-- Twitter video upload constraints
-https://developer.twitter.com/en/docs/media/upload-media/uploading-media/media-best-practices
-
-
-Issue around file size
-https://github.com/ttezel/twit/issues/461
-
-
-Current restriction by Twit library is 15 sec 
- -->
-
- 
+- Uses `fluent-ffmpeg`to trim clip and convert to [twitter video specs]( https://developer.twitter.com/en/docs/media/upload-media/uploading-media/media-best-practices) 
+  - `0.5 seconds and 30 seconds (sync) / 140 seconds (async) `
+  - `not exceed 15 mb (sync) / 512 mb (async)`
+- For twitter video upload and status post uses [script](https://gist.github.com/jcipriano/91bff4cb4ea51c355453161b6da02986) by [@jcipriano](https://gist.github.com/jcipriano) refactored into a module.
+ - It creates a tmp clipped/trimmed file and deletes it once the tweet is sent.
 
 ## Development env
 
@@ -125,9 +114,9 @@ _Coding style convention ref optional, eg which linter to use_
 
 _Linting, github pre-push hook - optional_
 
- 
- - node
- - npm 
+
+ - node `v10.0.0`
+ - npm `6.1.0`
 
 ## Build
 
@@ -139,14 +128,14 @@ No build step
 
 _How to carry out tests_
 
-No tests for now
+No tests for now, just `example-usage.js` files.
  
 
 ## Deployment
 
 _How to deploy the code/app into test/staging/production_
 
-No deployment for now
+No deployment, as node module, but available on npm as [`tweet-that-clip`](https://www.npmjs.com/package/tweet-that-clip)
 
 
 
