@@ -7,18 +7,20 @@ const path = require('path');
 const opts = {
   inputFile: path.join(__dirname,'./assets/test.mp4'),
   mediaType: 'video', // 'audio' or 'video'
-  outputFile: path.join(__dirname,'/example/test_clipped.mp4'),
+  outputFile: path.join(__dirname,'/example/test-clipped.mp4'),
   inputSeconds: 10, // seconds
   durationSeconds: 20, // in seconds. Up to 2min duration 
   // Twitter text status  280 characters limit.
   tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/', 
+  // tmp directory for creating intermediate clips when processing media
+  tmpDir: path.join(__dirname,'/assets'),
   // optional path to ffmpeg. eg To burn captions, needs, optional path to ffmpeg binary - enable libas, 
   // if not provided it uses default on system if present
   // if in doubt can give the path to https://www.npmjs.com/package/ffmpeg-static-electron
-  // ffmpegPath: "/usr/local/bin/ffmpeg",
-  ffmpegBin:'/Users/passap02/autoEdit_2/node_modules/ffmpeg-static-electron/bin/mac/x64/ffmpeg',
+  // ffmpegBin: "/usr/local/bin/ffmpeg",
+  ffmpegBin:'/Users/passap02/autoEdit_2/node_modules/ffmpeg-static-electron/bin/mac/x64/ffmpeg'//,
   // Optional caption file - if burning captions provide an srtFilePath.
-  srtFilePath:  path.join(__dirname,'./assets/captions.srt')
+  // srtFilePath:  path.join(__dirname,'./assets/captions.srt')
   // credentials: {
   //   consumerKey: "",
   //   consumerSecret: "",
@@ -29,7 +31,8 @@ const opts = {
 
 tweetThatClip(opts)
   .then((res)=>{
-    console.log('in example-usage for video',res);
+    console.log('in example-usage for video',res.outputFile);
+    // console.log(res.resTwitter);
   })
   .catch((error) => {
     console.log('Error in example-usage for video',error);

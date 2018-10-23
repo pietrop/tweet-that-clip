@@ -38,9 +38,8 @@ npm install tweet-that-clip
 
 ## Usage
 
-
-
 requrie and use in your code 
+
 ```js
 const path = require('path');
 const tweetThatClip = require('tweet-that-clip');
@@ -48,12 +47,15 @@ const tweetThatClip = require('tweet-that-clip');
 const opts = {
   // path to media file to trim and tweet
   inputFile: path.join(__dirname,'./assets/test.mp4'),
+   mediaType: 'video', // 'audio' or 'video'
   // path for tmp file to trim
   outputFile: path.join(__dirname,'./assets/test_clipped.mp4'),
   inputSeconds: 300, // In seconds 
   durationSeconds: 120, // Up to 2min duration - 120 Sec.
     // Twitter text status  280 characters limit.
-  tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/'
+  tweetText: 'The Trussell Trust found that food bank use increased by 52% in a year in areas where Universal Credit has been rolled out. The National Audit Office observed similar findings https://fullfact.org/economy/universal-credit-driving-people-food-banks/',
+  // tmp directory for creating intermediate clips when processing media
+  tmpDir: path.join(__dirname,'/assets')
 };
 
 tweetThatClip(opts, (err, res) => {
@@ -64,7 +66,7 @@ tweetThatClip(opts, (err, res) => {
 also See `/example-usage.js` file
 
 
-### Optional ffmpeg path
+### ffmpeg binary path
 
 eg if used inside electron, in combination with [`ffmpeg-static`](https://www.npmjs.com/package/ffmpeg-static) or [`ffmpeg-static-electron`](https://www.npmjs.com/package/ffmpeg-static-electron) then can pass in the path to the ffmpeg binary.
 
@@ -79,6 +81,25 @@ const opts = {
 ```
 
 If `ffmpegPath` not provided uses default one on the system, if present.
+
+### Waveform colors options
+
+Waveform colors options, are those supported by ffmpeg, [see docs](https://ffmpeg.org/ffmpeg-utils.html#Color).
+
+>It can be the name of a color as defined below (case insensitive match) or a [0x|#]RRGGBB[AA] sequence, possibly followed by @ and a string representing the alpha component.
+
+> The alpha component may be a string composed by "0x" followed by an hexadecimal number or a decimal number between 0.0 and 1.0, which represents the opacity value (‘0x00’ or ‘0.0’ means completely transparent, ‘0xff’ or ‘1.0’ completely opaque). If the alpha component is not specified then ‘0xff’ is assumed.
+
+The string ‘random’ will result in a random color.
+
+The following names of colors are recognized:
+
+You can see a list through 
+```
+ffmpeg -colors 
+```
+
+Reference list in [./ffmpeg-colors.md](./ffmpeg-colors.md).
 
 ### Optional credentials object
 For some use cases such as electron, you might want to pass in an optional `credentials` object attribute, see example blow
@@ -95,6 +116,10 @@ const opts = {
   }
 };
 ```
+
+### Optional captions file
+
+...
  
 
 ## System Architecture
