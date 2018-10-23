@@ -27,7 +27,10 @@ const opts = {
   // }
 };
 
-tweetThatClip(opts, (err, res) => {
-  console.log('in example-usage for video');
-  // console.log(err, res);
-});
+tweetThatClip(opts)
+  .then((res)=>{
+    console.log('in example-usage for video',res);
+  })
+  .catch((error) => {
+    console.log('Error in example-usage for video',error);
+  })

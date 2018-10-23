@@ -26,57 +26,65 @@ function tweetThatClip(opts) {
   if(opts.srtFilePath === undefined && opts.mediaType ==='video'){
     tmpOutputForTrim = opts.outputFile;
   }
-  // trim video 
-  trimVideo({
-      inputFile: opts.inputFile,
-      outputFile: tmpOutputForTrim,
-      inputSeconds: opts.inputSeconds,
-      durationSeconds: opts.durationSeconds
-    })
-    .catch(error => console.log(error))
-    // if audio create wave form waveform 
-    .then((resTrimmedFilePath)=>{
-      if(opts.mediaType ==='audio'){
-       return audioToVideoWaveForm({
-          audioSrc: resTrimmedFilePath,
-          outputFile: tmpOutputForWave
+  return new Promise((resolveTweetThatClip, rejectTweetThatClip)=>{
+    // trim video 
+    trimVideo({
+        inputFile: opts.inputFile,
+        outputFile: tmpOutputForTrim,
+        inputSeconds: opts.inputSeconds,
+        durationSeconds: opts.durationSeconds
+      })
+      .catch(error => console.log(error))
+      // if audio create wave form waveform 
+      .then((resTrimmedFilePath)=>{
+        if(opts.mediaType ==='audio'){
+        return audioToVideoWaveForm({
+            audioSrc: resTrimmedFilePath,
+            outputFile: tmpOutputForWave
+          })
+        }else{
+          return resTrimmedFilePath;
+        }
+      })
+      .catch(error => console.log(error))
+      // burn captions
+      .then((resReadyToBurnFilePath)=>{
+        // if captions not provided don't attempt to burn them
+        if(opts.srtFilePath !== undefined){
+          return  burnCaptions({
+            inputFile: resReadyToBurnFilePath,
+            srtFilePath: opts.srtFilePath,
+            outputFile:  tmpOutputForBunt,
+            ffmpegBin: opts.ffmpegBin
+          })
+        }else{
+          return resReadyToBurnFilePath;
+        }
+        
+      })
+      .catch(error => console.log(error))
+      // Tweet clip  
+      .then((resFileToUpload)=>{
+        console.log(resFileToUpload)
+        return tweetClipHelper({
+          credentials: opts.credentials,
+          outputFile: resFileToUpload,
+          tweetText: opts.tweetText
         })
-      }else{
-        return resTrimmedFilePath;
-      }
-    })
-    .catch(error => console.log(error))
-    // burn captions
-    .then((resReadyToBurnFilePath)=>{
-      // if captions not provided don't attempt to burn them
-      if(opts.srtFilePath !== undefined){
-        return  burnCaptions({
-          inputFile: resReadyToBurnFilePath,
-          srtFilePath: opts.srtFilePath,
-          outputFile:  tmpOutputForBunt,
-          ffmpegBin: opts.ffmpegBin
-        })
-      }else{
-        return resReadyToBurnFilePath;
-      }
+      })
+      .catch(error => console.log(error))
+      .then((res)=>{
+        console.log(res)
+        // resolving main module promise
+        resolveTweetThatClip(res);
+      })
+      .catch((error) => {
+        console.log(error);
+        // rejecting main module promise
+        rejectTweetThatClip(error);
+      })
       
     })
-    .catch(error => console.log(error))
-    // Tweet clip  
-    .then((resFileToUpload)=>{
-      console.log(resFileToUpload)
-      return tweetClipHelper({
-        credentials: opts.credentials,
-        outputFile: resFileToUpload,
-        tweetText: opts.tweetText
-      })
-    })
-    .catch(error => console.log(error))
-    .then((res)=>{
-      console.log(res)
-    })
-    .catch(error => console.log(error))
-
   
     // Helper functions 
 

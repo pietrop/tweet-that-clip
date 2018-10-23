@@ -16,9 +16,9 @@ const opts = {
   // if not provided it uses default on system if present
   // if in doubt can give the path to https://www.npmjs.com/package/ffmpeg-static-electron
   // ffmpegPath: "/usr/local/bin/ffmpeg",
-  ffmpegBin:'/Users/passap02/autoEdit_2/node_modules/ffmpeg-static-electron/bin/mac/x64/ffmpeg'//,
+  ffmpegBin:'/Users/passap02/autoEdit_2/node_modules/ffmpeg-static-electron/bin/mac/x64/ffmpeg',
   // Optional caption file - if burning captions provide an srtFilePath.
-  // srtFilePath:  path.join(__dirname,'./assets/captions.srt')
+  srtFilePath:  path.join(__dirname,'./assets/captions.srt')
   // credentials: {
   //   consumerKey: "",
   //   consumerSecret: "",
@@ -27,7 +27,10 @@ const opts = {
   // }
 };
 
-tweetThatClip(opts, (err, res) => {
-  console.log('in example-usage for audio');
-  // console.log(err, res);
-});
+tweetThatClip(opts)
+  .then((res)=>{
+    console.log('in example-usage for audio',res);
+  })
+  .catch((error) => {
+    console.log('Error in example-usage for audio',error);
+  })
