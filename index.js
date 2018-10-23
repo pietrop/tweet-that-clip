@@ -83,7 +83,7 @@ function tweetThatClip(opts) {
       .catch(error => console.log(error))
       // Tweet clip  
       .then((resFileToUpload)=>{
-         TweetVideo({
+         return TweetVideo({
           credentials: opts.credentials,
           filePath: resFileToUpload,
           tweetText: opts.tweetText
