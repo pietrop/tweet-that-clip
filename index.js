@@ -9,7 +9,7 @@ const fs = require('fs');
 const trimVideo = require('./lib/trim/index.js');
 const audioToVideoWaveForm = require('./lib/audio-to-video-waveform/index.js');
 const burnCaptions  = require('./lib/burn-captions/index.js');
-const TweetWithVideo = require('./lib/TweetWithVideo/index.js');
+const TweetVideo = require('./lib/TweetWithVideo/index.js');
 
 // TODO: needs refactoring and simplifying 
 function tweetThatClip(opts) {
@@ -27,7 +27,7 @@ function tweetThatClip(opts) {
     tmpOutputForTrim = opts.outputFile;
   }
   return new Promise((resolveTweetThatClip, rejectTweetThatClip)=>{
-    // trim video 
+    // Trim video 
     trimVideo({
         inputFile: opts.inputFile,
         outputFile: tmpOutputForTrim,
@@ -35,7 +35,7 @@ function tweetThatClip(opts) {
         durationSeconds: opts.durationSeconds
       })
       .catch(error => console.log(error))
-      // if audio create wave form waveform 
+      // if audio create Waveform  
       .then((resTrimmedFilePath)=>{
         if(opts.mediaType ==='audio'){
         return audioToVideoWaveForm({
@@ -47,7 +47,7 @@ function tweetThatClip(opts) {
         }
       })
       .catch(error => console.log(error))
-      // burn captions
+      // Burn captions - optional 
       .then((resReadyToBurnFilePath)=>{
         // if captions not provided don't attempt to burn them
         if(opts.srtFilePath !== undefined){
@@ -66,56 +66,25 @@ function tweetThatClip(opts) {
       // Tweet clip  
       .then((resFileToUpload)=>{
         console.log(resFileToUpload)
-        return tweetClipHelper({
+        return TweetVideo({
           credentials: opts.credentials,
-          outputFile: resFileToUpload,
+          filePath: resFileToUpload,
           tweetText: opts.tweetText
         })
       })
       .catch(error => console.log(error))
       .then((res)=>{
-        console.log(res)
-        // resolving main module promise
-        resolveTweetThatClip(res);
+        // TODO: consider adding logic to remove tmp files here 
+        // cleanUpTmpFiles();
+       return resolveTweetThatClip(res);
       })
       .catch((error) => {
-        console.log(error);
         // rejecting main module promise
-        rejectTweetThatClip(error);
+        return rejectTweetThatClip(error);
       })
       
     })
-  
-    // Helper functions 
-
-  // wrapped tweet module into a promise, if works, move into tweet moodule
-  function tweetClipHelper(opts){
-  // TODO: this could be refactored? to be a bit cleaner
-    return new Promise((resolve, reject)=>{
-      let videoTweet = new TweetWithVideo({
-        // if they are not set is just passed as undefined. for now keeping logic of deciding which credentials to use use within the module, while figure out cleaner solution.
-        credentials: opts.credentials,
-        file_path: opts.outputFile,
-        tweet_text: opts.tweetText
-      }, (error, response)=>{
-        // Deleting the trimmed clip 
-        // console.log(opts.outputFile);
-        // fs.unlinkSync(opts.outputFile);
-        console.info('Twitter upload finished.');
-        // cleanUpTmpFiles(opts.outputFile);
-        if (error) {
-          // return callback(error,null);
-          reject(error);
-        }
-        else{
-          resolve(response);
-          // return  callback(null, response);
-        }
-      });
-    })
-  }
-
-
+ 
   /**
    * Helper function to remove tmp files used to create segment
    * to upload to twitter
