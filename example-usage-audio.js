@@ -31,7 +31,7 @@ const opts = {
 
 tweetThatClip(opts)
   .then((res)=>{
-    console.log('in example-usage for audio',res.outputFile);
+    console.log('in example-usage for audio', res.outputFile);
     // console.log(res.resTwitter);
   })
   .catch((error) => {
